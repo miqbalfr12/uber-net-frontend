@@ -67,8 +67,8 @@ const ModalSendTagihan = ({open, handler, color, refreshData, data}) => {
      <div className="flex flex-col gap-4 mb-4">
       <div className="flex flex-wrap w-full gap-2 md:flex-nowrap">
        <p>
-        Apakah anda yakin ingin mengirim informasi tagihan ({data && data.order_id}) ke{" "}
-        <b>{data && data.pelanggan.name}</b>?
+        Apakah anda yakin ingin mengirim informasi tagihan (
+        {data && data.order_id}) ke <b>{data && data?.pelanggan?.name}</b>?
        </p>
       </div>
      </div>
