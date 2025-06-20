@@ -5,6 +5,7 @@ import Table from "@/components/table";
 import {useSession} from "next-auth/react";
 import ModalTambahUser from "@/components/modal/modalTambahUser";
 import ModalTambahTagihan from "@/components/modal/modalTambahTagihan";
+import ModalSendTagihanPelanggan from "@/components/modal/modalSendTagihanPelanggan";
 
 const header = [
  "no",
@@ -62,7 +63,8 @@ const Page = () => {
  }, []);
 
  const handleModal = (type) => {
-  setOpen(type);
+  if (type) setOpen(type);
+  else setOpen(false);
  };
 
  return (
@@ -88,15 +90,20 @@ const Page = () => {
       data={data}
       header={header}
       handleRefresh={refreshData}
-      color="blue"
+      color="yellow"
      />
     </div>
    </div>
+   <ModalSendTagihanPelanggan
+    open={open === "kirim-tagihan"}
+    handler={handleModal}
+    color="yellow"
+   />
    <ModalTambahTagihan
     open={open === "tagihan"}
     handler={handleModal}
     refreshData={refreshData}
-    color="blue"
+    color="yellow"
    />
   </>
  );

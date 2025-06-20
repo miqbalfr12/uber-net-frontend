@@ -6,7 +6,17 @@ import {useSession} from "next-auth/react";
 import ModalTambahUser from "@/components/modal/modalTambahUser";
 import ModalSendAnnouncePelanggan from "@/components/modal/modalSendAnnouncePelanggan";
 
-const header = ["no", "nik", "name", "alamat", "paket", "status", "aksi"];
+const header = [
+ "no",
+ "nik",
+ "user_id",
+ "name",
+ "number",
+ "alamat",
+ "paket",
+ "status",
+ "aksi",
+];
 
 const Page = () => {
  const {data: session} = useSession();
@@ -88,7 +98,7 @@ const Page = () => {
     </div>
    </div>
    <ModalTambahUser
-    open={open}
+    open={open === "tambah"}
     handler={handleModal}
     refreshData={refreshData}
     color="yellow"

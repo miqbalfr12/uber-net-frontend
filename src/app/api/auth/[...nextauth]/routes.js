@@ -14,11 +14,11 @@ export const menuOwner = [
   content: "Pengaturan",
   icon: "SettingsIcon",
   items: [
-   {
-    type: "link",
-    href: "/owner/list-pelanggan",
-    content: "Pelanggan",
-   },
+   //    {
+   //     type: "link",
+   //     href: "/owner/list-pelanggan",
+   //     content: "Pelanggan",
+   //    },
    {
     type: "link",
     href: "/owner/list-admin",
@@ -41,11 +41,11 @@ export const menuOwner = [
     href: "/owner/data-pendapatan",
     content: "Pendapatan",
    },
-   {
-    type: "link",
-    href: "/owner/data-tagihan",
-    content: "Tagihan",
-   },
+   //    {
+   //     type: "link",
+   //     href: "/owner/data-tagihan",
+   //     content: "Tagihan",
+   //    },
   ],
  },
  {

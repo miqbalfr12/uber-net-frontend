@@ -17,6 +17,7 @@ import ModalSettlement from "../modal/ModalSettlement";
 import ModalSendAnnounce from "../modal/ModalSendAnnounce";
 import {useSession} from "next-auth/react";
 import ModalEditOrder from "../modal/ModalEditOrder";
+import ModalSendTagihan from "../modal/modalSendTagihan";
 
 const Table = ({data, header, color, dataPegawai, handleRefresh}) => {
  const {data: session} = useSession();
@@ -156,7 +157,7 @@ const Table = ({data, header, color, dataPegawai, handleRefresh}) => {
                 return (
                  <button
                   key={index}
-                  onClick={() => handleOpen("view", itemd)}
+                  onClick={() => handleOpen("sendTagihan", itemd)}
                   className="bg-[#76B445] p-2 rounded-md">
                   <SendIcon className="text-white" />
                  </button>
@@ -183,7 +184,7 @@ const Table = ({data, header, color, dataPegawai, handleRefresh}) => {
                 return (
                  <button
                   key={index}
-                  onClick={() => handleOpen("view", itemd)}
+                  onClick={() => handleOpen("sendTagihan", itemd)}
                   className="bg-[#76B445] p-2 rounded-md">
                   <SendIcon className="text-white" />
                  </button>
@@ -298,6 +299,12 @@ const Table = ({data, header, color, dataPegawai, handleRefresh}) => {
     data={dataSurat}
     handler={handleOpen}
     color={color}
+   />
+   <ModalSendTagihan
+    open={open === "sendTagihan"}
+    color={color}
+    data={dataSurat}
+    handler={handleOpen}
    />
    <ModalSettlement
     open={open === "settlement"}
