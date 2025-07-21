@@ -75,11 +75,11 @@ const Page = () => {
     <div className="h-[250px] bg-[#2D95CA] p-8 text-white  pt-16 flex justify-between">
      <p className="text-3xl font-semibold">Pelanggan</p>
      <div className="flex gap-4">
-      <button
+      {/* <button
        onClick={() => handleModal("pengumuman")}
        className="text-[#2D95CA] text-xl bg-white rounded-md h-fit p-2 px-4">
        Buat Pengumuman
-      </button>
+      </button> */}
       <button
        onClick={() => handleModal("tambah")}
        className="text-[#2D95CA] text-xl bg-white rounded-md h-fit p-2 px-4">

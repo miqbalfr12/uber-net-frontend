@@ -33,6 +33,8 @@ const Page = () => {
 
  const [listPaket, setListPaket] = React.useState([]);
 
+ const [isLoading, setIsLoading] = React.useState(false);
+
  const getDataPaket = async () => {
   console.log("get data");
   await fetch("/api/v1.0.0/isp", {
@@ -76,6 +78,34 @@ const Page = () => {
     setData(resJson);
    } else {
     console.log(await res.text());
+   }
+  });
+ };
+
+ const cetakLaporan = async () => {
+  console.log("cetak");
+  setIsLoading(true);
+  await fetch(
+   "/api/v1.0.0/transaksi/cetak/laporan?bulan=" +
+    bulanPilih +
+    "&paket=" +
+    paketPilih,
+   {
+    method: "GET",
+    headers: {
+     authorization: `Bearer ${session.user.token}`,
+    },
+    cache: "no-store",
+   }
+  ).then(async (res) => {
+   if (res.ok) {
+    const resJson = await res.json();
+    setIsLoading(false);
+    console.log(resJson.link);
+    window.open(resJson.link);
+   } else {
+    console.log(await res.text());
+    setIsLoading(false);
    }
   });
  };
@@ -139,8 +169,10 @@ const Page = () => {
     </div>
 
     <div className="grid grid-cols-1 gap-8">
-     <button className="flex flex-col flex-1 min-w-[250px] gap-4 p-4 bg-[#2D95CA] text-white text-center rounded-lg shadow-lg items-center text-xl font-semibold">
-      Cetak
+     <button
+      onClick={isLoading ? () => {} : cetakLaporan}
+      className="flex flex-col flex-1 min-w-[250px] gap-4 p-4 bg-[#2D95CA] text-white text-center rounded-lg shadow-lg items-center text-xl font-semibold">
+      {isLoading ? "Loading..." : "Cetak Laporan"}
      </button>
     </div>
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-1 md:grid-cols-3 bg-white rounded-lg shadow-lg">

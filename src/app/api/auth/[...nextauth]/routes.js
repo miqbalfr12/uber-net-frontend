@@ -9,28 +9,7 @@ export const menuOwner = [
   type: "text",
   content: "MENU UTAMA",
  },
- {
-  type: "dropdown",
-  content: "Pengaturan",
-  icon: "SettingsIcon",
-  items: [
-   //    {
-   //     type: "link",
-   //     href: "/owner/list-pelanggan",
-   //     content: "Pelanggan",
-   //    },
-   {
-    type: "link",
-    href: "/owner/list-admin",
-    content: "Admin",
-   },
-   //    {
-   //     type: "link",
-   //     href: "/owner/informasi-usaha",
-   //     content: "Informasi Usaha",
-   //    },
-  ],
- },
+
  {
   type: "dropdown",
   content: "Data",
@@ -75,6 +54,18 @@ export const menuAdmin = [
  {
   type: "text",
   content: "MENU UTAMA",
+ },
+ {
+  type: "dropdown",
+  content: "Pengaturan",
+  icon: "SettingsIcon",
+  items: [
+   {
+    type: "link",
+    href: "/admin/list-admin",
+    content: "Admin",
+   },
+  ],
  },
  {
   type: "dropdown",

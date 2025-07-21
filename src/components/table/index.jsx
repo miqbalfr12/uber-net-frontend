@@ -19,7 +19,8 @@ import {useSession} from "next-auth/react";
 import ModalEditOrder from "../modal/ModalEditOrder";
 import ModalSendTagihan from "../modal/modalSendTagihan";
 
-const Table = ({data, header, color, dataPegawai, handleRefresh}) => {
+const Table = ({data, header, color, dataPegawai, handleRefresh, filter}) => {
+ console.log(filter);
  const {data: session} = useSession();
  const [open, setOpen] = React.useState(false);
  const [dataSurat, setDataSurat] = React.useState(false);
@@ -123,140 +124,147 @@ const Table = ({data, header, color, dataPegawai, handleRefresh}) => {
         : "border-black"
       } md:table-row-group flex flex-col gap-4`}>
       {data && data.length ? (
-       data.map((itemd, indexd) => {
-        return (
-         <tr
-          key={indexd}
-          className="flex flex-col border-b-2 md:border-b-0 md:table-row">
-          {header.map((itemh, indexh) =>
-           itemh === "aksi" ? (
-            <td
-             key={indexh}
-             className="flex items-start justify-center gap-2 p-2">
-             {itemd[itemh].map((item, index) => {
-              switch (item) {
-               case "view":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("view", itemd)}
-                  className="bg-[#2D95CA] p-2 rounded-md">
-                  <EyeIcon className="text-white" />
-                 </button>
-                );
-               case "viewOrder":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("settlement", itemd)}
-                  className="bg-[#2D95CA] p-2 rounded-md">
-                  <EyeIcon className="text-white" />
-                 </button>
-                );
-               case "sendOrder":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("sendTagihan", itemd)}
-                  className="bg-[#76B445] p-2 rounded-md">
-                  <SendIcon className="text-white" />
-                 </button>
-                );
-               case "editOrder":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("editOrder", itemd)}
-                  className="bg-[#76B445] p-2 rounded-md">
-                  <PencilIcon className="text-white" />
-                 </button>
-                );
-               case "sendAnnounce":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("sendAnnounce", itemd)}
-                  className="bg-[#76B445] p-2 rounded-md">
-                  <SendIcon className="text-white" />
-                 </button>
-                );
-               case "sendSettlement":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("sendTagihan", itemd)}
-                  className="bg-[#76B445] p-2 rounded-md">
-                  <SendIcon className="text-white" />
-                 </button>
-                );
-               case "settlement":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("settlement", itemd)}
-                  className="bg-[#2D95CA] p-2 rounded-md">
-                  <EyeIcon className="text-white" />
-                 </button>
-                );
-               case "bayar":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("bayar", itemd)}
-                  className="bg-[#76B445] p-2 rounded-md">
-                  <QrCode className="text-white" />
-                 </button>
-                );
-               case "edit":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("editUserPelanggan", itemd)}
-                  className="bg-[#76B445] p-2 rounded-md">
-                  <PencilIcon className="text-white" />
-                 </button>
-                );
-               case "delete":
-                return (
-                 <button
-                  onClick={() => handleOpen("deleteUser", itemd)}
-                  key={index}
-                  className="bg-[#E28839] p-2 rounded-md">
-                  <Trash2Icon className="text-white" />
-                 </button>
-                );
-               case "restore":
-                return (
-                 <button
-                  key={index}
-                  onClick={() => handleOpen("restoreUser", itemd)}
-                  className="bg-[#E28839] p-2 rounded-md">
-                  <ArchiveRestoreIcon className="text-white" />
-                 </button>
-                );
-              }
-             })}
-            </td>
-           ) : (
-            <td
-             key={indexh}
-             className="p-2">
-             <div className="flex flex-wrap gap-2">
-              <span className="font-semibold md:hidden">
-               {itemh
-                .split("_")
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(" ")}
-               {" : "}
-              </span>
-              <span>{itemd[itemh] ? itemd[itemh] : "-"}</span>
-             </div>
-            </td>
-           )
-          )}
-         </tr>
-        );
-       })
+       data
+        .filter((itemd) => {
+         if (filter) {
+          return itemd.name.toLowerCase().includes(filter.toLowerCase());
+         }
+         return true;
+        })
+        .map((itemd, indexd) => {
+         return (
+          <tr
+           key={indexd}
+           className="flex flex-col border-b-2 md:border-b-0 md:table-row">
+           {header.map((itemh, indexh) =>
+            itemh === "aksi" ? (
+             <td
+              key={indexh}
+              className="flex items-start justify-center gap-2 p-2">
+              {itemd[itemh].map((item, index) => {
+               switch (item) {
+                case "view":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("view", itemd)}
+                   className="bg-[#2D95CA] p-2 rounded-md">
+                   <EyeIcon className="text-white" />
+                  </button>
+                 );
+                case "viewOrder":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("settlement", itemd)}
+                   className="bg-[#2D95CA] p-2 rounded-md">
+                   <EyeIcon className="text-white" />
+                  </button>
+                 );
+                case "sendOrder":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("sendTagihan", itemd)}
+                   className="bg-[#76B445] p-2 rounded-md">
+                   <SendIcon className="text-white" />
+                  </button>
+                 );
+                case "editOrder":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("editOrder", itemd)}
+                   className="bg-[#76B445] p-2 rounded-md">
+                   <PencilIcon className="text-white" />
+                  </button>
+                 );
+                case "sendAnnounce":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("sendAnnounce", itemd)}
+                   className="bg-[#76B445] p-2 rounded-md">
+                   <SendIcon className="text-white" />
+                  </button>
+                 );
+                case "sendSettlement":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("sendTagihan", itemd)}
+                   className="bg-[#76B445] p-2 rounded-md">
+                   <SendIcon className="text-white" />
+                  </button>
+                 );
+                case "settlement":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("settlement", itemd)}
+                   className="bg-[#2D95CA] p-2 rounded-md">
+                   <EyeIcon className="text-white" />
+                  </button>
+                 );
+                case "bayar":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("bayar", itemd)}
+                   className="bg-[#76B445] p-2 rounded-md">
+                   <QrCode className="text-white" />
+                  </button>
+                 );
+                case "edit":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("editUserPelanggan", itemd)}
+                   className="bg-[#76B445] p-2 rounded-md">
+                   <PencilIcon className="text-white" />
+                  </button>
+                 );
+                case "delete":
+                 return (
+                  <button
+                   onClick={() => handleOpen("deleteUser", itemd)}
+                   key={index}
+                   className="bg-[#E28839] p-2 rounded-md">
+                   <Trash2Icon className="text-white" />
+                  </button>
+                 );
+                case "restore":
+                 return (
+                  <button
+                   key={index}
+                   onClick={() => handleOpen("restoreUser", itemd)}
+                   className="bg-[#E28839] p-2 rounded-md">
+                   <ArchiveRestoreIcon className="text-white" />
+                  </button>
+                 );
+               }
+              })}
+             </td>
+            ) : (
+             <td
+              key={indexh}
+              className="p-2">
+              <div className="flex flex-wrap gap-2">
+               <span className="font-semibold md:hidden">
+                {itemh
+                 .split("_")
+                 .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                 .join(" ")}
+                {" : "}
+               </span>
+               <span>{itemd[itemh] ? itemd[itemh] : "-"}</span>
+              </div>
+             </td>
+            )
+           )}
+          </tr>
+         );
+        })
       ) : (
        <tr>
         <td

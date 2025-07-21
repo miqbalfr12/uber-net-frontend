@@ -1,6 +1,6 @@
 "use client";
 import {useSession} from "next-auth/react";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Modal from "..";
 import {X} from "lucide-react";
 import Input from "@/components/input";
@@ -139,31 +139,8 @@ const ModalTambahTagihan = ({open, handler, color, refreshData}) => {
        <X />
       </button>
      </div>
-     <div className="flex flex-col gap-4 mb-4">
-      <div>
-       <p className="text-xl font-semibold">Pilih Pelanggan</p>
-      </div>
-      <div className="flex flex-wrap w-full gap-2 md:flex-nowrap">
-       <select
-        name="user_id"
-        id="user_id"
-        onChange={(e) => {
-         const index = e.target.selectedIndex;
-         const selected = listUsers[index];
-         setSelectedUser(selected);
-         setSelectedPaket(selected?.paket || "");
-        }}
-        className="w-full px-3 py-2 border-b-2 border-gray-300 focus:border-[#2D95CA] focus:outline-none">
-        {listUsers.map((item, index) => (
-         <option
-          key={index}
-          value={item.value}>
-          {item.item}
-         </option>
-        ))}
-       </select>
-      </div>
-     </div>
+     <DropdownWithSearch listUsers={listUsers} />
+
      <div className="flex flex-col gap-4 mb-4">
       <div>
        <p className="text-xl font-semibold">Layanan</p>
@@ -234,6 +211,51 @@ const ModalTambahTagihan = ({open, handler, color, refreshData}) => {
     {failMsg}
    </ModalFailed>
   </>
+ );
+};
+
+const DropdownWithSearch = ({listUsers}) => {
+ const [searchTerm, setSearchTerm] = useState("");
+ const [selectedUser, setSelectedUser] = useState(null);
+ const [selectedPaket, setSelectedPaket] = useState("");
+
+ const filteredUsers = listUsers.filter((user) =>
+  user.item.toLowerCase().includes(searchTerm.toLowerCase())
+ );
+
+ return (
+  <div className="flex flex-col gap-4 mb-4">
+   <div>
+    <p className="text-xl font-semibold">Pilih Pelanggan</p>
+   </div>
+   <div className="flex flex-col w-full gap-2">
+    <input
+     type="text"
+     className="w-full px-3 py-2 border-b-2 border-gray-300 focus:border-[#2D95CA] focus:outline-none"
+     placeholder="Cari Pelanggan..."
+     value={searchTerm}
+     onChange={(e) => setSearchTerm(e.target.value)}
+    />
+    <select
+     name="user_id"
+     id="user_id"
+     onChange={(e) => {
+      const index = e.target.selectedIndex;
+      const selected = listUsers[index];
+      setSelectedUser(selected);
+      setSelectedPaket(selected?.paket || "");
+     }}
+     className="w-full px-3 py-2 border-b-2 border-gray-300 focus:border-[#2D95CA] focus:outline-none">
+     {filteredUsers.map((item, index) => (
+      <option
+       key={index}
+       value={item.value}>
+       {item.item}
+      </option>
+     ))}
+    </select>
+   </div>
+  </div>
  );
 };
 

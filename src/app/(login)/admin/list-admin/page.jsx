@@ -3,27 +3,16 @@ import React, {useEffect} from "react";
 
 import Table from "@/components/table";
 import {useSession} from "next-auth/react";
-import ModalTambahUser from "@/components/modal/modalTambahUser";
-import ModalTambahTagihan from "@/components/modal/modalTambahTagihan";
-import ModalSendTagihanPelanggan from "@/components/modal/modalSendTagihanPelanggan";
+import ModalTambahAdmin from "@/components/modal/modalTambahAdmin";
 
-const header = [
- "no",
- "tanggal",
- "order_id",
- "name",
- "alamat",
- "paket",
- "status",
- "aksi",
-];
+const header = ["no", "nik", "email", "name", "alamat", "aksi"];
 
 const Page = () => {
  const {data: session} = useSession();
  const [open, setOpen] = React.useState(false);
  const [data, setData] = React.useState([]);
  const getData = async () => {
-  await fetch("/api/v1.0.0/users/tagihan", {
+  await fetch("/api/v1.0.0/users?keperluan=admin", {
    method: "GET",
    headers: {
     authorization: `Bearer ${session.user.token}`,
@@ -33,23 +22,8 @@ const Page = () => {
    if (res.ok) {
     const resJson = await res.json();
     console.log(resJson);
-    const flatUsers = resJson.map((user, index) => {
-     return {
-      ...user,
-      no: index + 1,
-      detailPaket: user.paket,
-      name: user.pelanggan.name,
-      alamat: user.pelanggan.alamat,
-      paket: user.speed,
-      status: user?.status
-       .split("_")
-       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-       .join(" "),
-     };
-    });
-    console.log(flatUsers);
 
-    setData(flatUsers);
+    setData(resJson);
    }
   });
  };
@@ -62,19 +36,23 @@ const Page = () => {
   getData();
  }, []);
 
- const handleModal = (type) => {
-  if (type) setOpen(type);
-  else setOpen(false);
+ const handleModal = () => {
+  setOpen((prev) => !prev);
  };
 
  const [filter, setFilter] = React.useState("");
+
  return (
   <>
    <div className="relative text-black">
     <div className="h-[250px] bg-[#E28839] p-8 text-white  pt-16 flex justify-between">
-     <p className="text-3xl font-semibold">Tagihan</p>
+     <p className="text-3xl font-semibold">Admin</p>
      <div className="flex gap-4">
-      {" "}
+      {/* <button
+       onClick={() => handleModal()}
+       className="text-[#E28839] text-xl bg-white rounded-md h-fit p-2 px-4">
+       Buat Pengumuman
+      </button> */}{" "}
       <input
        className="bg-white text-[#E28839] text-xl rounded-md h-fit p-2 px-4"
        type="text"
@@ -82,14 +60,9 @@ const Page = () => {
        placeholder="Cari Pelanggan"
       />
       <button
-       onClick={() => handleModal("kirim-tagihan")}
+       onClick={() => handleModal()}
        className="text-[#E28839] text-xl bg-white rounded-md h-fit p-2 px-4">
-       Kirim Tagihan
-      </button>
-      <button
-       onClick={() => handleModal("tagihan")}
-       className="text-[#E28839] text-xl bg-white rounded-md h-fit p-2 px-4">
-       Buat Tagihan
+       Tambah Admin
       </button>
      </div>
     </div>
@@ -103,13 +76,8 @@ const Page = () => {
      />
     </div>
    </div>
-   <ModalSendTagihanPelanggan
-    open={open === "kirim-tagihan"}
-    handler={handleModal}
-    color="yellow"
-   />
-   <ModalTambahTagihan
-    open={open === "tagihan"}
+   <ModalTambahAdmin
+    open={open}
     handler={handleModal}
     refreshData={refreshData}
     color="yellow"

@@ -70,17 +70,27 @@ const Page = () => {
   else setOpen(false);
  };
 
+ const [filter, setFilter] = React.useState("");
+
  return (
   <>
    <div className="relative text-black">
     <div className="h-[250px] bg-[#E28839] p-8 text-white  pt-16 flex justify-between">
      <p className="text-3xl font-semibold">Pelanggan</p>
      <div className="flex gap-4">
-      <button
+      <div>
+       <input
+        className="bg-white text-[#E28839] text-xl rounded-md h-fit p-2 px-4"
+        type="text"
+        onChange={(e) => setFilter(e.target.value)}
+        placeholder="Cari Pelanggan"
+       />
+      </div>
+      {/* <button
        onClick={() => handleModal("pengumuman")}
        className="text-[#E28839] text-xl bg-white rounded-md h-fit p-2 px-4">
        Buat Pengumuman
-      </button>
+      </button> */}
       <button
        onClick={() => handleModal("tambah")}
        className="text-[#E28839] text-xl bg-white rounded-md h-fit p-2 px-4">
@@ -90,6 +100,7 @@ const Page = () => {
     </div>
     <div className="absolute flex flex-col w-full gap-8 p-8 top-1/2">
      <Table
+     filter={filter}
       data={data}
       header={header}
       handleRefresh={refreshData}
