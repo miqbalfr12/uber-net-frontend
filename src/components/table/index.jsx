@@ -14,7 +14,7 @@ import ModalDeleteUser from "../modal/modalDeleteUser";
 import ModalRestoreUser from "../modal/modalRestoreUser";
 import ModalEditUser from "../modal/modalEditUser";
 import ModalSettlement from "../modal/ModalSettlement";
-import ModalSendAnnounce from "../modal/ModalSendAnnounce/index.jsx";
+import ModalSendAnnounce from "../modal/modalSendAnnounce/index.jsx";
 import {useSession} from "next-auth/react";
 import ModalEditOrder from "../modal/ModalEditOrder";
 import ModalSendTagihan from "../modal/modalSendTagihan";
