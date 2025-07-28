@@ -71,7 +71,7 @@ const authOptions = {
      return {...jsonData, statusCode: res.status};
     });
     if (userData.error) {
-     return signOut({callbackUrl: "/"});
+     return signOut({callbackUrl: "https://ubernetsolution.site/"});
     }
     token.expires = Date.now() + 60 * 1000 * 60 * 24; // 1 day
    }

@@ -5,7 +5,7 @@ import {useEffect} from "react";
 
 export default function Home() {
  useEffect(() => {
-  signOut({callbackUrl: "/"});
+  signOut({callbackUrl: "https://ubernetsolution.site/"});
  });
  return (
   <div className="flex items-center justify-center w-full h-screen bg-white">
