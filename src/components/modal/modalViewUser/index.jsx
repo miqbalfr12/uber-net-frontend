@@ -3,7 +3,7 @@ import Modal from "..";
 import {X} from "lucide-react";
 import ModalViewPDF from "../modalViewPDF";
 
-const modalViewUser = ({open, handler, color, data}) => {
+const ModalViewUser = ({open, handler, color, data}) => {
  const [openView, setOpenView] = React.useState(false);
  console.log(data);
  const handleView = () => {
@@ -192,4 +192,4 @@ const modalViewUser = ({open, handler, color, data}) => {
  );
 };
 
-export default modalViewUser;
+export default ModalViewUser;
