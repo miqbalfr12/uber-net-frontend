@@ -11,21 +11,10 @@ export const menuOwner = [
  },
 
  {
-  type: "dropdown",
-  content: "Data",
+  type: "link",
+  href: "/owner/data-pendapatan",
+  content: "Pendapatan",
   icon: "LayersIcon",
-  items: [
-   {
-    type: "link",
-    href: "/owner/data-pendapatan",
-    content: "Pendapatan",
-   },
-   //    {
-   //     type: "link",
-   //     href: "/owner/data-tagihan",
-   //     content: "Tagihan",
-   //    },
-  ],
  },
  {
   type: "link",
@@ -57,21 +46,14 @@ export const menuAdmin = [
  },
  {
   type: "dropdown",
-  content: "Pengaturan",
-  icon: "SettingsIcon",
+  content: "Data",
+  icon: "LayersIcon",
   items: [
    {
     type: "link",
     href: "/admin/list-admin",
     content: "Admin",
    },
-  ],
- },
- {
-  type: "dropdown",
-  content: "Data",
-  icon: "LayersIcon",
-  items: [
    {
     type: "link",
     href: "/admin/list-pelanggan",
