@@ -46,12 +46,13 @@ const Page = () => {
   }).then(async (res) => {
    if (res.ok) {
     const resJson = await res.json();
-    const paketan = resJson.map((item) => {
-     return {
+    const paketan = [
+     {value: "All", item: "All"},
+     ...resJson.map((item) => ({
       value: item.isp_id,
       item: item.speed,
-     };
-    });
+     })),
+    ];
     setListPaket(paketan);
     console.log(paketan[0].value);
     setPaketPilih(paketan[0].value);
