@@ -12,7 +12,7 @@ export default function RootLayout({children}) {
    <SessionProvider>
     <head>
      <Script
-      src="https://app.sandbox.midtrans.com/snap/snap.js"
+      src="https://app.midtrans.com/snap/snap.js"
       data-client-key={process.env.NEXT_PUBLIC_CLIENT}></Script>
     </head>
     <body className={inter.className}>{children}</body>
