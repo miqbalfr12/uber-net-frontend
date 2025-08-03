@@ -109,7 +109,7 @@ const ModalDeleteUser = ({open, handler, color, data, refreshData}) => {
      setOpenSub(false);
      handler();
     }}>
-    Berhasil Menghapus User
+    Hapus Akun Pelanggan Berhasil Disimpan
    </ModalSuccess>
    <ModalFailed
     open={openSub === "Failed"}

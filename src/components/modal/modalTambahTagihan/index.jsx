@@ -200,7 +200,7 @@ const ModalTambahTagihan = ({open, handler, color, refreshData}) => {
      setOpenSub(false);
      handler();
     }}>
-    Buat Tagihan Berhasila
+    Buat Tagihan Berhasil
    </ModalSuccess>
    <ModalFailed
     open={openSub === "Failed"}

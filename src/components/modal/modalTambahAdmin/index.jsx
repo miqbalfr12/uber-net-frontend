@@ -172,7 +172,7 @@ const ModalTambahUser = ({open, handler, color, refreshData}) => {
      setOpenSub(false);
      handler();
     }}>
-    Buat Akun User Berhasilan Disimpan
+    Buat Akun Admin Berhasil Disimpan
    </ModalSuccess>
    <ModalFailed
     open={openSub === "Failed"}

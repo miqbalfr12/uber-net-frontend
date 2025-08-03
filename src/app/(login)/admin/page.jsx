@@ -73,7 +73,7 @@ const Page = () => {
     <div className="flex flex-col flex-1 min-w-[250px] gap-4 p-8 bg-white rounded-lg shadow-lg">
      <h3 className="text-2xl font-semibold">Dashboard</h3>
      <p>
-      Selamat Datang {session.user.name} di UBER NET! Anda login sebagai Owner.
+      Selamat Datang {session.user.name} di UBER NET! Anda login sebagai Admin.
      </p>
     </div>
    </div>

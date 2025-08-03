@@ -231,7 +231,7 @@ const ModalEditUser = ({open, handler, color, refreshData, data}) => {
      setOpenSub(false);
      handler();
     }}>
-    Buat Akun User Berhasilan Disimpan
+    Edit Akun User Berhasil Disimpan
    </ModalSuccess>
    <ModalFailed
     open={openSub === "Failed"}

@@ -130,7 +130,7 @@ const ModalEditOrder = ({open, handler, color, data, refreshData}) => {
      setOpenSub(false);
      handler();
     }}>
-    Berhasil Melunasi Tagihan
+    Melunasi Tagihan Berhasil
    </ModalSuccess>
    <ModalFailed
     open={openSub === "Failed"}

@@ -114,7 +114,7 @@ const ModalSendTagihanPelanggan = ({
      setOpenSub(false);
      handler();
     }}>
-    Buat Pengumuman
+    Kirim Tagihan Berhasil
    </ModalSuccess>
    <ModalFailed
     open={openSub === "Failed"}
